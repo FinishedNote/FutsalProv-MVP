@@ -5,4 +5,5 @@ export const store = configureStore({
   reducer: {
     user: userSlice.reducer,
   },
+  devTools: true, // TODO: disable in production
 });
