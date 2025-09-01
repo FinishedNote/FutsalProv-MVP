@@ -1,12 +1,58 @@
-# React + Vite
+# FutsalProv-MVP
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Licence : Propriétaire – utilisation interdite sans autorisation**  
+© 2025 NevCenter
 
-Currently, two official plugins are available:
+Ce logiciel est destiné uniquement à des tests internes ou démonstrations auprès de partenaires autorisés (ex. comité provincial pilote).  
+Toute copie, redistribution ou utilisation commerciale sans accord écrit est interdite.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
 
-## Expanding the ESLint configuration
+FutsalProv-MVP est un logiciel minimal pour la gestion des compétitions de futsal au niveau provincial en Belgique. Il couvre :
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Calendriers et résultats
+- Arbitrage
+- Discipline (cartons et suspensions)
+
+L'objectif est de simplifier le quotidien des comités provinciaux, clubs et arbitres en fournissant un outil plus accessible et moderne que les solutions existantes.
+
+## Tech Stack
+
+- Frontend : React, Redux, React Router
+- Backend / BDD : Supabase (Postgres, Auth, fonctions SQL)
+- Notifications : Email via Supabase ou service externe
+
+## Installation
+
+1. Cloner le repo :
+
+   ```bash
+   git clone https://github.com/FinishedNote/FutsalProv-MVP
+   cd FutsalProv-MVP
+   ```
+
+2. Installer les dépendances :
+
+   ```bash
+   npm install
+   ```
+
+3. Démarrer le serveur de développement :
+   ```bash
+   npm run dev
+   ```
+
+# Roadmap
+
+1. **Fonctionnalités à venir**
+
+   - Gestion des utilisateurs et des rôles
+   - Intégration d'un système de paiement pour les inscriptions
+   - Amélioration de l'interface utilisateur
+
+2. **Contributions**
+
+   - Les contributions sont les bienvenues ! Veuillez soumettre une demande de tirage pour toute amélioration ou correction.
+
+3. **Suivi des problèmes**
+   - Utilisez le système de suivi des problèmes GitHub pour signaler des bogues ou demander des fonctionnalités.
