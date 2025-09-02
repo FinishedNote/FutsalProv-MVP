@@ -4,10 +4,10 @@ import supabase from "../lib/supabaseClient";
 export const handleSignUp = async (form, setLoading, navigate) => {
   setLoading(true);
 
-  const { email, password, username } = form;
+  const { email, password, username, role } = form;
 
-  if (!email || !password || !username) {
-    console.error("Email, password, and username are required");
+  if (!email || !password || !username || !role) {
+    console.error("Email, password, username, and role are required");
     return;
   }
 
@@ -31,7 +31,7 @@ export const handleSignUp = async (form, setLoading, navigate) => {
 
     const { data: profileData, error: profileError } = await supabase
       .from("profiles")
-      .insert([{ id: userId, username }]);
+      .insert([{ id: userId, username, role }]);
 
     if (profileError) throw profileError;
 

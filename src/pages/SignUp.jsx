@@ -1,9 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { handleSignUp } from "../services/authService";
+import Input from "../components/Input";
+import SubmitButton from "../components/SubmitButton";
 
 const SignUp = () => {
-  const [form, setForm] = useState({ email: "", password: "", username: "" });
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+    username: "",
+    role: "",
+  });
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -16,42 +23,40 @@ const SignUp = () => {
     <div>
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
+        <Input
+          label="Email"
+          type="email"
+          value={form.email}
+          onChange={(value) => setForm({ ...form, email: value })}
+        />
+        <Input
+          label="Password"
+          type="password"
+          value={form.password}
+          onChange={(value) => setForm({ ...form, password: value })}
+        />
+        <Input
+          label="Username"
+          type="text"
+          value={form.username}
+          onChange={(value) => setForm({ ...form, username: value })}
+        />
         <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          <label htmlFor="role">Role:</label>
+          <select
+            id="role"
+            name="role"
+            value={form.role}
+            onChange={(e) => setForm({ ...form, role: e.target.value })}
             required
-          />
+          >
+            <option value="">Select a role</option>
+            <option value="arbitrator">Arbitre</option>
+            <option value="club">Club</option>
+            <option value="admin-comite">Administrateur comite</option>
+          </select>
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={form.password}
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={form.username}
-            onChange={(e) => setForm({ ...form, username: e.target.value })}
-            required
-          />
-        </div>
-        <button type="submit" disabled={loading}>
-          {loading ? "Signing Up..." : "Sign Up"}
-        </button>
+        <SubmitButton title="Sign Up" isLoading={loading} />
       </form>
       <p>
         Already have an account? <Link to="/sign-in">Sign In</Link>

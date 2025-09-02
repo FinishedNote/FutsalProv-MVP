@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { handleSignIn } from "../services/authService";
+import Input from "../components/Input";
+import SubmitButton from "../components/SubmitButton";
 
 const SignIn = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -16,25 +18,19 @@ const SignIn = () => {
     <div>
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={form.password}
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-          />
-        </div>
-        <button type="submit" disabled={loading}>
-          {loading ? "Signing In..." : "Sign In"}
-        </button>
+        <Input
+          label="Email"
+          type="email"
+          value={form.email}
+          onChange={(value) => setForm({ ...form, email: value })}
+        />
+        <Input
+          label="Password"
+          type="password"
+          value={form.password}
+          onChange={(value) => setForm({ ...form, password: value })}
+        />
+        <SubmitButton title="Sign In" isLoading={loading} />
       </form>
       <p>
         Don't have an account? <Link to="/sign-up">Sign Up</Link>
