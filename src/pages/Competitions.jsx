@@ -1,23 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
 import supabase from "../lib/supabaseClient";
-
-const fetchCompetitions = async () => {
-  const { data } = await supabase.from("competitions").select("*");
-  return data;
-};
+import { useSelector } from "react-redux";
+import { useCompetitions } from "../hooks/useCompetitions";
 
 const Competitions = () => {
-  const {
-    data: competitions,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["competitions"],
-    queryFn: fetchCompetitions,
-  });
+  const user = useSelector((state) => state.user) || {};
+  const { data: competitions, isLoading, error } = useCompetitions(user);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading competitions</p>;
+
+  const handleCreateCompetition = async () => {
+    if (!user) return;
+
+    if (user.role !== "admin-comite") {
+      alert("You do not have permission to create competitions");
+      return;
+    }
+
+    await supabase
+      .from("competitions")
+      .insert({ name: "Provinciale Hainaut D3", season: "2025-2026" });
+  };
 
   return (
     <div>
@@ -31,6 +34,7 @@ const Competitions = () => {
           <p>No competitions found</p>
         )}
       </ul>
+      <button onClick={handleCreateCompetition}>Create Competition</button>
     </div>
   );
 };
