@@ -9,8 +9,6 @@ import { useDispatch } from "react-redux";
 const App = () => {
   const dispatch = useDispatch();
 
-  // TODO: delete profiles in supabase, then test again
-
   const fetchUserProfile = async (userId) => {
     const { data, error } = await supabase
       .from("profiles")

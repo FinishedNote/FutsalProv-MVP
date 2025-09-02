@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import supabase from "../lib/supabaseClient";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -11,9 +13,8 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h2>Dashboard</h2>
-      <p>Welcome to your dashboard!</p>
-      <p>You can manage your account settings here.</p>
+      <h2>Welcome to your dashboard {user?.username}!</h2>
+      <h3>You can manage your account settings here.</h3>
       <button onClick={handleSignOut}>Sign Out</button>
     </div>
   );
