@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import supabase from "./lib/supabaseClient";
-import { setUser } from "./redux/slices/userSlice";
+import { clearUser, setUser } from "./redux/slices/userSlice";
 // routing
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./routes/AppRoutes";
@@ -9,33 +9,53 @@ import { useDispatch } from "react-redux";
 const App = () => {
   const dispatch = useDispatch();
 
+  // TODO: delete profiles in supabase, then test again
+
+  const fetchUserProfile = async (userId) => {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", userId)
+      .maybeSingle();
+
+    if (error) {
+      console.error(
+        "Erreur lors de la récupération du profil :",
+        error.message
+      );
+      return;
+    }
+    if (data) {
+      dispatch(setUser(data));
+    }
+  };
+
   useEffect(() => {
-    // TODO: debug user profile in redux state
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", session.user.id)
-          .then(({ data }) => {
-            dispatch(setUser(data[0]));
-          });
+    const getSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session?.user) {
+        fetchUserProfile(session.user.id);
       }
-    });
+    };
+
+    getSession();
+
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) {
-        supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", session.user.id)
-          .then(({ data }) => {
-            dispatch(setUser(data[0]));
-          });
+      if (session?.user) {
+        fetchUserProfile(session.user.id);
+      } else {
+        dispatch(clearUser());
       }
     });
-    return () => subscription.unsubscribe();
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [dispatch]);
 
   return (
