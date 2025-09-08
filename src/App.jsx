@@ -7,60 +7,60 @@ import AppRoutes from "./routes/AppRoutes";
 import { useDispatch } from "react-redux";
 
 const App = () => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  const fetchUserProfile = async (userId) => {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", userId)
-      .maybeSingle();
+    const fetchUserProfile = async (userId) => {
+        const { data, error } = await supabase
+            .from("users")
+            .select("*")
+            .eq("user_id", userId)
+            .maybeSingle();
 
-    if (error) {
-      console.error(
-        "Erreur lors de la récupération du profil :",
-        error.message
-      );
-      return;
-    }
-    if (data) {
-      dispatch(setUser(data));
-    }
-  };
-
-  useEffect(() => {
-    const getSession = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      if (session?.user) {
-        fetchUserProfile(session.user.id);
-      }
+        if (error) {
+            console.error(
+                "Erreur lors de la récupération du profil :",
+                error.message
+            );
+            return;
+        }
+        if (data) {
+            dispatch(setUser(data));
+        }
     };
 
-    getSession();
+    useEffect(() => {
+        const getSession = async () => {
+            const {
+                data: { session },
+            } = await supabase.auth.getSession();
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        fetchUserProfile(session.user.id);
-      } else {
-        dispatch(clearUser());
-      }
-    });
+            if (session?.user) {
+                fetchUserProfile(session.user.id);
+            }
+        };
 
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [dispatch]);
+        getSession();
 
-  return (
-    <Router>
-      <AppRoutes />
-    </Router>
-  );
+        const {
+            data: { subscription },
+        } = supabase.auth.onAuthStateChange((_event, session) => {
+            if (session?.user) {
+                fetchUserProfile(session.user.id);
+            } else {
+                dispatch(clearUser());
+            }
+        });
+
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, [dispatch]);
+
+    return (
+        <Router>
+            <AppRoutes />
+        </Router>
+    );
 };
 
 export default App;
