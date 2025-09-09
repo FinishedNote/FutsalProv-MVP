@@ -32,12 +32,7 @@ const Competitions = () => {
       <ul>
         {competitions && competitions.length > 0 ? (
           competitions.map((c) => (
-            <CompetitionCard
-              key={c.id}
-              name={c.name}
-              season={c.season}
-              id={c.id}
-            />
+            <CompetitionCard key={c.id} competition={c} />
           ))
         ) : (
           <li>Aucunes compétitions trouvées</li>

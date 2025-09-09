@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "../lib/supabaseClient";
 
-export const useCompetitions = () => {
+export const useClubs = () => {
   return useQuery({
-    queryKey: ["competitions"],
+    queryKey: ["clubs"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("competitions")
-        .select("name, season, id");
+        .from("clubs")
+        .select("name, province, logo_url, id");
 
       if (error) throw error;
       return data;

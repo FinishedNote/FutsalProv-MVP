@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
-const CompetitionCard = ({ name, season, id }) => {
+const CompetitionCard = ({ competition }) => {
   const navigate = useNavigate();
 
   return (
     <li>
-      <h2>{name}</h2>
-      <p>Saison: {season}</p>
-      <button onClick={() => navigate(`/competitions/${id}`)}>
+      <h2>{competition.name}</h2>
+      <p>Saison: {competition.season}</p>
+      <button onClick={() => navigate(`/competitions/${competition.name}`)}>
         Voir Détails
       </button>
     </li>

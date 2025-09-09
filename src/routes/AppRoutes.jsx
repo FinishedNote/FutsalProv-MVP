@@ -3,15 +3,17 @@ import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 // pages
 import Home from "../pages/Home";
+import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword";
-import SignUp from "../pages/SignUp";
 import Dashboard from "../pages/Dashboard";
 import Competitions from "../pages/Competitions";
+import Competition from "../pages/Competition";
+import Clubs from "../pages/Clubs";
+import Club from "../pages/Club";
 import Calendar from "../pages/Calendar";
 import Error from "../pages/Error";
-import Competition from "../pages/Competition";
 
 const AppRoutes = () => {
   return (
@@ -42,6 +44,22 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <Competition />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/clubs"
+        element={
+          <ProtectedRoute>
+            <Clubs />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/clubs/:id"
+        element={
+          <ProtectedRoute>
+            <Club />
           </ProtectedRoute>
         }
       />
