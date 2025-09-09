@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { resetPassword } from "../services/authService";
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
-    await resetPassword(password, confirmPassword);
+    await resetPassword(password, confirmPassword, navigate);
   };
 
   return (

@@ -11,6 +11,7 @@ import Dashboard from "../pages/Dashboard";
 import Competitions from "../pages/Competitions";
 import Calendar from "../pages/Calendar";
 import Error from "../pages/Error";
+import Competition from "../pages/Competition";
 
 const AppRoutes = () => {
   return (
@@ -33,6 +34,14 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <Competitions />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/competitions/:id"
+        element={
+          <ProtectedRoute>
+            <Competition />
           </ProtectedRoute>
         }
       />
