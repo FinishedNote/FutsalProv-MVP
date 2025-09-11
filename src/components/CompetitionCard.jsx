@@ -7,7 +7,9 @@ const CompetitionCard = ({ competition }) => {
     <li>
       <h2>{competition.name}</h2>
       <p>Saison: {competition.season}</p>
-      <button onClick={() => navigate(`/competitions/${competition.name}`)}>
+      <button
+        onClick={() => navigate(`/dashboard/competitions/${competition.name}`)}
+      >
         Voir Détails
       </button>
     </li>

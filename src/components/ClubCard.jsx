@@ -8,7 +8,7 @@ const ClubCard = ({ club }) => {
     <li key={club.id}>
       <h2>{club.name}</h2>
       <p>{club.province}</p>
-      <button onClick={() => navigate(`/clubs/${club.name}`)}>
+      <button onClick={() => navigate(`/dashboard/clubs/${club.name}`)}>
         Voir Détails
       </button>
     </li>

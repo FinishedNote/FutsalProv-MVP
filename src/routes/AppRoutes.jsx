@@ -13,6 +13,7 @@ import Competition from "../pages/Competition";
 import Clubs from "../pages/Clubs";
 import Club from "../pages/Club";
 import Calendar from "../pages/Calendar";
+import Account from "../pages/Account";
 import Error from "../pages/Error";
 
 const AppRoutes = () => {
@@ -32,7 +33,7 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/competitions"
+        path="/dashboard/competitions"
         element={
           <ProtectedRoute>
             <Competitions />
@@ -40,7 +41,7 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/competitions/:id"
+        path="/dashboard/competitions/:id"
         element={
           <ProtectedRoute>
             <Competition />
@@ -48,7 +49,7 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/clubs"
+        path="/dashboard/clubs"
         element={
           <ProtectedRoute>
             <Clubs />
@@ -56,7 +57,7 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/clubs/:id"
+        path="/dashboard/clubs/:id"
         element={
           <ProtectedRoute>
             <Club />
@@ -64,13 +65,14 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/calendar"
+        path="/dashboard/calendar"
         element={
           <ProtectedRoute>
             <Calendar />
           </ProtectedRoute>
         }
       />
+      <Route path="/dashboard/account" element={<Account />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );
